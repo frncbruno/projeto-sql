@@ -39,7 +39,7 @@ sqlite3 censo_escolar.db -- inicia a database que vamos utilizar
 -- importação das tabelas para a database
 .import "/.../dados/Tabela_Matricula_2025.csv" matricula 
 .import "/.../dados/Tabela_Turma_2025.csv" turma
-.import "/.../microdados_censo_escolar_2025/dados/Tabela_Escola_2025.csv" escola
+.import "/.../dados/Tabela_Escola_2025.csv" escola
 .import "/.../dados/Tabela_Docente_2025.csv" docente
 .import "/.../dados/Tabela_Gestor_Escolar_2025.csv" gestor_escolar
 .import "/.../dados/Tabela_Curso_Tecnico_2025.csv" curso_tecnico
