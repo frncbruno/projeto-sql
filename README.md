@@ -26,7 +26,27 @@ Santa Maria é o maior município do interior gaúcho e concentra uma rede escol
 
 ## ⚙️ Metodologia
 
-## 0. Consultas iniciais
+## 0. Criação da database
+Para iniciarmos as consultas, criei uma database (.db) pelo próprio SQLite no Visual Studio Code.
+
+Primeiro, tive que iniciá-lo utilizando 
+
+```sql
+sqlite3 censo_escolar.db -- inicia a database que vamos utilizar
+.mode csv -- entende que iremos ler CSVs, modo que o Governo disponibiliza os dados
+.separator ";" -- entende que iremos separar as colunas com ";", modo que o Governo separa os dados CSVs
+
+-- importação das tabelas para a database
+.import "/.../dados/Tabela_Matricula_2025.csv" matricula 
+.import "/.../dados/Tabela_Turma_2025.csv" turma
+.import "/.../microdados_censo_escolar_2025/dados/Tabela_Escola_2025.csv" escola
+.import "/.../dados/Tabela_Docente_2025.csv" docente
+.import "/.../dados/Tabela_Gestor_Escolar_2025.csv" gestor_escolar
+.import "/.../dados/Tabela_Curso_Tecnico_2025.csv" curso_tecnico
+.import "/.../dados/RESULTADOS_ENEM.csv" resultados
+```
+
+## 1. Consultas iniciais
 
 A partir dessa primeira consulta, poderemos ter um norte de como seguiremos com o projeto. Com ela, saberemos a quantidade total de escolas que iremos trabalhar.
 
@@ -60,7 +80,7 @@ WHERE e1.NO_MUNICIPIO = 'Santa Maria'
 
 ### 1. Índice de Infraestrutura Escolar (IIE)
 
-A partir das variáveis binárias (`IN_*`) do Censo Escolar, foi construído um índice composto que avalia cada escola em quatro dimensões, com pesos proporcionais ao impacto pedagógico:
+A partir das variáveis do Censo Escolar, foi construído um índice composto que avalia cada escola em quatro dimensões, com pesos proporcionais ao impacto pedagógico:
 
 | Dimensão | Indicadores | Peso |
 |---|---|---|
@@ -69,9 +89,10 @@ A partir das variáveis binárias (`IN_*`) do Censo Escolar, foi construído um 
 | Tecnologia | Internet, banda larga, computadores, equipamento multimídia | 2 por item |
 | Acessibilidade & extras | Rampas, corrimão, piso tátil, auditório, banheiro PNE | 1 por item (penalidade se nenhum recurso) |
 
-O score bruto (máximo de 36 pontos) foi normalizado para uma escala de **0 a 100**, e as escolas foram classificadas em três categorias pelo método de percentis (P33 e P66):
+A pontuação bruta (máximo de 36 pontos) foi normalizado para uma escala de **0 a 100**, para ficar mais prático. Ou seja, 36 pontos = 100%. 
+As escolas foram classificadas em três categorias:
 
-| Categoria | Score | Escolas |
+| Categoria | Pontuação | Escolas |
 |---|---|---|
 | 🟢 Boa | ≥ 75 pontos | 67 escolas (34%) |
 | 🟡 Mediana | 61 – 74 pontos | 67 escolas (34%) |
@@ -79,7 +100,7 @@ O score bruto (máximo de 36 pontos) foi normalizado para uma escala de **0 a 10
 
 ### 2. Médias do ENEM por Escola
 
-A partir dos microdados do ENEM, as notas individuais foram agregadas por escola (`CO_ESCOLA`), calculando a média de cada área separadamente e a média geral — evitando o problema de registros com notas ausentes (`NULL`) que descartariam alunos indevidamente se somados antes de agregar.
+A partir dos microdados do ENEM, as notas individuais foram agregadas por escola (`CO_ESCOLA`), calculando a média de cada área separadamente e a média geral, podendo evitar o problema de registros com notas ausentes (`NULL`) que descartariam alunos indevidamente se somados antes de agregar.
 
 ```sql
 SELECT
@@ -101,11 +122,12 @@ ORDER BY MEDIA_GERAL DESC;
 
 ### 3. Cruzamento e Análise
 
-O vínculo entre as duas bases é feito pelo código da escola (`CO_ENTIDADE` no Censo = `CO_ESCOLA` no ENEM). A análise combina:
+O vínculo entre as duas bases é feito pelo código da escola (`CO_ENTIDADE` no Censo = `CO_ESCOLA` no ENEM). Em termos "SQL", poderia ser chamado de `ID ou chaves primárias`, utilizadas para vincular duas ou mais tabelas pelo `JOIN`.
 
+A análise vai combinar:
 - **Correlação** entre IIE e média geral do ENEM
-- **Comparação por categoria** de infraestrutura (Boa / Mediana / Precária)
-- **Comparação por dependência administrativa** (Federal, Estadual, Municipal, Privada)
+- **Comparação por categoria** de infraestrutura (Boa/Mediana/Precária)
+- **Comparação por dependência administrativa** (Federal/Estadual/Municipal/Privada)
 - **Casos de destaque**: escolas com infraestrutura precária e bom desempenho, ou o inverso
 
 ---
@@ -113,7 +135,6 @@ O vínculo entre as duas bases é feito pelo código da escola (`CO_ENTIDADE` no
 ## 📊 Resultados Esperados
 
 Com base na análise, esperamos responder a perguntas como:
-
 - Existe correlação entre infraestrutura e nota no ENEM em Santa Maria?
 - As escolas municipais, que concentram a maioria das classificadas como precárias, apresentam as menores médias?
 - Quais escolas surpreendem — para cima ou para baixo — em relação ao que sua infraestrutura sugeriria?
