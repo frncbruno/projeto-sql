@@ -1,2 +1,145 @@
-# projeto-sql
+# Projeto SQL
 Este projeto investiga uma questão central da educação pública brasileira: a infraestrutura de uma escola influencia o desempenho dos seus alunos?
+
+# 🏫 Infraestrutura Escolar e Desempenho no ENEM — Santa Maria, RS
+
+> Análise exploratória da relação entre infraestrutura física das escolas e o desempenho médio dos alunos no ENEM, com foco no município de Santa Maria (RS).
+
+---
+
+## 📌 Contexto
+
+Este projeto investiga uma questão central da educação pública brasileira: **a infraestrutura de uma escola influencia o desempenho dos seus alunos?**
+
+Santa Maria é o maior município do interior gaúcho e concentra uma rede escolar diversa — escolas federais, estaduais, municipais e privadas —, o que torna o recorte municipal ideal para comparar realidades muito distintas dentro de um mesmo território.
+
+---
+
+## 🗂️ Fontes de Dados
+
+| Fonte | Descrição |
+|---|---|
+| **Censo Escolar 2025 (INEP)** | Dados de infraestrutura física de todas as escolas do município |
+| **Microdados do ENEM** | Notas individuais dos alunos por escola, filtradas para Santa Maria/RS |
+
+---
+
+## ⚙️ Metodologia
+
+### 1. Índice de Infraestrutura Escolar (IIE)
+
+A partir das variáveis binárias (`IN_*`) do Censo Escolar, foi construído um índice composto que avalia cada escola em quatro dimensões, com pesos proporcionais ao impacto pedagógico:
+
+| Dimensão | Indicadores | Peso |
+|---|---|---|
+| Saneamento básico | Água potável, energia elétrica, esgoto, coleta de lixo, banheiro, cozinha | 1 por item |
+| Espaços pedagógicos | Biblioteca, laboratório de ciências, laboratório de informática, quadra esportiva, sala de professores, refeitório, pátio coberto | 2 por item |
+| Tecnologia | Internet, banda larga, computadores, equipamento multimídia | 2 por item |
+| Acessibilidade & extras | Rampas, corrimão, piso tátil, auditório, banheiro PNE | 1 por item (penalidade se nenhum recurso) |
+
+O score bruto (máximo de 36 pontos) foi normalizado para uma escala de **0 a 100**, e as escolas foram classificadas em três categorias pelo método de percentis (P33 e P66):
+
+| Categoria | Score | Escolas |
+|---|---|---|
+| 🟢 Boa | ≥ 75 pontos | 67 escolas (34%) |
+| 🟡 Mediana | 61 – 74 pontos | 67 escolas (34%) |
+| 🔴 Precária | < 61 pontos | 61 escolas (31%) |
+
+### 2. Médias do ENEM por Escola
+
+A partir dos microdados do ENEM, as notas individuais foram agregadas por escola (`CO_ESCOLA`), calculando a média de cada área separadamente e a média geral — evitando o problema de registros com notas ausentes (`NULL`) que descartariam alunos indevidamente se somados antes de agregar.
+
+```sql
+SELECT
+    CO_ESCOLA,
+    COUNT(*)                       AS QT_ALUNOS,
+    ROUND(AVG(NU_NOTA_CN), 1)      AS MEDIA_CN,
+    ROUND(AVG(NU_NOTA_CH), 1)      AS MEDIA_CH,
+    ROUND(AVG(NU_NOTA_LC), 1)      AS MEDIA_LC,
+    ROUND(AVG(NU_NOTA_MT), 1)      AS MEDIA_MT,
+    ROUND(AVG(NU_NOTA_REDACAO), 1) AS MEDIA_RED,
+    ROUND(
+        (AVG(NU_NOTA_CN) + AVG(NU_NOTA_CH) + AVG(NU_NOTA_LC) + AVG(NU_NOTA_MT) + AVG(NU_NOTA_REDACAO)) / 5.0
+    , 1)                           AS MEDIA_GERAL
+FROM resultados
+WHERE SG_UF_ESC = 'RS'
+GROUP BY CO_ESCOLA
+ORDER BY MEDIA_GERAL DESC;
+```
+
+### 3. Cruzamento e Análise
+
+O vínculo entre as duas bases é feito pelo código da escola (`CO_ENTIDADE` no Censo = `CO_ESCOLA` no ENEM). A análise combina:
+
+- **Correlação** entre IIE e média geral do ENEM
+- **Comparação por categoria** de infraestrutura (Boa / Mediana / Precária)
+- **Comparação por dependência administrativa** (Federal, Estadual, Municipal, Privada)
+- **Casos de destaque**: escolas com infraestrutura precária e bom desempenho, ou o inverso
+
+---
+
+## 📊 Resultados Esperados
+
+Com base na análise, esperamos responder a perguntas como:
+
+- Existe correlação entre infraestrutura e nota no ENEM em Santa Maria?
+- As escolas municipais, que concentram a maioria das classificadas como precárias, apresentam as menores médias?
+- Quais escolas surpreendem — para cima ou para baixo — em relação ao que sua infraestrutura sugeriria?
+- A infraestrutura tecnológica (internet, computadores) tem correlação mais forte com o desempenho do que o saneamento básico?
+
+Os resultados podem contribuir para **decisões de investimento em infraestrutura escolar**, apontando onde a melhoria física teria maior potencial de impacto no aprendizado.
+
+---
+
+## 🗺️ Panorama Inicial (Censo Escolar 2025)
+
+Das **195 escolas** analisadas em Santa Maria:
+
+- Escolas **privadas** dominam o topo do índice de infraestrutura
+- Escolas **municipais** concentram 39 das 61 classificadas como precárias
+- Escolas **federais** (UFSM/Politécnico e Colégio Militar) pontuam no máximo do índice
+- **31%** das escolas do município operam com infraestrutura precária
+
+---
+
+## 📁 Estrutura do Repositório
+
+```
+.
+├── data/
+│   ├── Colegios_santa_maria.csv      # Censo Escolar 2025 — infraestrutura
+│   └── Notas_santa_maria.csv         # Microdados ENEM — notas por aluno
+├── outputs/
+│   ├── infra_scores.csv              # IIE calculado por escola
+│   └── infraestrutura_escolas_santa_maria.html  # Dashboard interativo
+├── analysis/
+│   └── (notebooks e scripts em desenvolvimento)
+└── README.md
+```
+
+---
+
+## 🚧 Status do Projeto
+
+- [x] Coleta e limpeza dos dados do Censo Escolar
+- [x] Construção do Índice de Infraestrutura Escolar (IIE)
+- [x] Classificação das 195 escolas em Boa / Mediana / Precária
+- [x] Dashboard interativo de infraestrutura
+- [x] Coleta e validação dos microdados do ENEM
+- [ ] Cruzamento IIE × médias do ENEM
+- [ ] Análise de correlação e visualizações finais
+- [ ] Relatório de conclusões
+
+---
+
+## 🛠️ Tecnologias
+
+- **Python** (pandas) — processamento e análise dos dados
+- **SQL (SQLite)** — agregação dos microdados do ENEM
+- **HTML/CSS/JS** — dashboard interativo de infraestrutura
+
+---
+
+## 📜 Licença
+
+Dados públicos provenientes do INEP. Este projeto é de caráter educacional e não possui fins comerciais.
