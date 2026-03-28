@@ -189,10 +189,10 @@ Das **195 escolas** analisadas em Santa Maria:
 
 - **Python** (pandas) — processamento e análise dos dados
 - **SQL (SQLite)** — agregação dos microdados do ENEM
-- **HTML/CSS/JS** — dashboard interativo de infraestrutura
+- **VS Code** — IDE utilizada
 
 ---
 
-## 📜 Licença
+## 📜 Fonte
 
-Dados públicos provenientes do INEP. Este projeto é de caráter educacional e não possui fins comerciais.
+Dados públicos provenientes do INEP e Ministério da Educação.
