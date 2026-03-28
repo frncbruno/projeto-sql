@@ -26,6 +26,38 @@ Santa Maria é o maior município do interior gaúcho e concentra uma rede escol
 
 ## ⚙️ Metodologia
 
+## 0. Consultas iniciais
+
+A partir dessa primeira consulta, poderemos ter um norte de como seguiremos com o projeto. Com ela, saberemos a quantidade total de escolas que iremos trabalhar.
+
+```sql
+SELECT *
+FROM escola
+WHERE NO_MUNICIPIO = 'Santa Maria' AND SG_UF = 'RS';
+```
+
+Depois disso, foi necessário reunir todas as tabelas que os dados do Ministério da Educação proporcionou, para podermos relacionar e, logo depois, realizar as manipulações e extrações de dados necessárias.
+
+```sql
+SELECT * FROM escola AS e1
+
+LEFT JOIN turma AS e2 
+ON e1.CO_ENTIDADE = e2.CO_ENTIDADE
+
+LEFT JOIN gestor_escolar AS e3
+ON e1.CO_ENTIDADE = e3.CO_ENTIDADE
+
+LEFT JOIN matricula AS e4
+ON e1.CO_ENTIDADE = e4.CO_ENTIDADE
+
+LEFT JOIN docente AS e5
+ON e1.CO_ENTIDADE = e5.CO_ENTIDADE
+
+WHERE e1.NO_MUNICIPIO = 'Santa Maria' 
+      AND e1.SG_UF = 'RS'
+```
+
+
 ### 1. Índice de Infraestrutura Escolar (IIE)
 
 A partir das variáveis binárias (`IN_*`) do Censo Escolar, foi construído um índice composto que avalia cada escola em quatro dimensões, com pesos proporcionais ao impacto pedagógico:
