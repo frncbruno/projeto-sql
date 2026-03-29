@@ -1,5 +1,6 @@
 # Projeto
-Este projeto investiga uma questão central da educação pública brasileira: a infraestrutura de uma escola influencia o desempenho dos seus alunos?
+Este projeto investiga uma questão central da educação pública brasileira: 
+**a infraestrutura de uma escola influencia o desempenho dos seus alunos?**
 
 Santa Maria é o maior município do interior gaúcho e concentra uma rede escolar diversa com escolas federais, estaduais, municipais e privadas, o que torna o recorte municipal ideal para comparar realidades muito distintas dentro de um mesmo território.
 
