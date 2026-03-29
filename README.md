@@ -2,7 +2,7 @@
 Este projeto investiga uma questão central da educação pública brasileira: 
 **a infraestrutura de uma escola influencia o desempenho dos seus alunos?**
 
-Santa Maria é o maior município do interior gaúcho e concentra uma rede escolar diversa com escolas federais, estaduais, municipais e privadas, o que torna o recorte municipal ideal para comparar realidades muito distintas dentro de um mesmo território.
+Santa Maria é o maior município do interior gaúcho e concentra uma rede escolar diversa com escolas federais, estaduais e privadas, o que torna o recorte municipal ideal para comparar realidades muito distintas dentro de um mesmo território.
 
 ---
 
@@ -120,7 +120,7 @@ O vínculo entre as duas bases é feito pelo código da escola (`CO_ENTIDADE` no
 A análise vai combinar:
 - **Correlação** entre IIE e média geral do ENEM
 - **Comparação por categoria** de infraestrutura (Boa/Mediana/Precária)
-- **Comparação por dependência administrativa** (Federal/Estadual/Municipal/Privada)
+- **Comparação por dependência administrativa** (Federal/Estadual/Privada)
 - **Casos de destaque**: escolas com infraestrutura precária e bom desempenho, ou o inverso
 
 ---
@@ -129,7 +129,7 @@ A análise vai combinar:
 
 Com base na análise, esperamos responder a perguntas como:
 - Existe correlação entre infraestrutura e nota no ENEM em Santa Maria?
-- As escolas municipais, que concentram a maioria das classificadas como precárias, apresentam as menores médias?
+- As escolas estaduais, que concentram a maioria das classificadas como precárias, apresentam as menores médias?
 - Quais escolas surpreendem — para cima ou para baixo — em relação ao que sua infraestrutura sugeriria?
 - A infraestrutura tecnológica (internet, computadores) tem correlação mais forte com o desempenho do que o saneamento básico?
 
@@ -142,7 +142,7 @@ Os resultados podem contribuir para **decisões de investimento em infraestrutur
 Das **195 escolas** analisadas em Santa Maria:
 
 - Escolas **privadas** dominam o topo do índice de infraestrutura
-- Escolas **municipais** concentram 39 das 61 classificadas como precárias
+- Escolas **estaduais** concentram 39 das 61 classificadas como precárias
 - Escolas **federais** (UFSM/Politécnico e Colégio Militar) pontuam no máximo do índice
 - **31%** das escolas do município operam com infraestrutura precária
 
