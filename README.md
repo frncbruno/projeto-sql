@@ -1,17 +1,7 @@
-# Projeto SQL
+# Projeto
 Este projeto investiga uma questão central da educação pública brasileira: a infraestrutura de uma escola influencia o desempenho dos seus alunos?
 
-# 🏫 Infraestrutura Escolar e Desempenho no ENEM — Santa Maria, RS
-
-> Análise exploratória da relação entre infraestrutura física das escolas e o desempenho médio dos alunos no ENEM, com foco no município de Santa Maria (RS).
-
----
-
-## 📌 Contexto
-
-Este projeto investiga uma questão central da educação pública brasileira: **a infraestrutura de uma escola influencia o desempenho dos seus alunos?**
-
-Santa Maria é o maior município do interior gaúcho e concentra uma rede escolar diversa — escolas federais, estaduais, municipais e privadas —, o que torna o recorte municipal ideal para comparar realidades muito distintas dentro de um mesmo território.
+Santa Maria é o maior município do interior gaúcho e concentra uma rede escolar diversa com escolas federais, estaduais, municipais e privadas, o que torna o recorte municipal ideal para comparar realidades muito distintas dentro de um mesmo território.
 
 ---
 
@@ -164,10 +154,8 @@ Das **195 escolas** analisadas em Santa Maria:
 │   └── Notas_santa_maria.csv         # Microdados ENEM — notas por aluno
 ├── outputs/
 │   ├── infra_scores.csv              # IIE calculado por escola
-│   └── infraestrutura_escolas_santa_maria.html  # Dashboard interativo
 ├── analysis/
-│   └── (notebooks e scripts em desenvolvimento)
-└── README.md
+    └── (dashboards em desenvolvimento)
 ```
 
 ---
@@ -179,7 +167,7 @@ Das **195 escolas** analisadas em Santa Maria:
 - [x] Classificação das 195 escolas em Boa / Mediana / Precária
 - [x] Dashboard interativo de infraestrutura
 - [x] Coleta e validação dos microdados do ENEM
-- [ ] Cruzamento IIE × médias do ENEM
+- [x] Cruzamento IIE × médias do ENEM
 - [ ] Análise de correlação e visualizações finais
 - [ ] Relatório de conclusões
 
@@ -189,6 +177,7 @@ Das **195 escolas** analisadas em Santa Maria:
 
 - **Python** (pandas) — processamento e análise dos dados
 - **SQL (SQLite)** — agregação dos microdados do ENEM
+- **Power BI** — ferramenta utilizada para a criação dos dashboards, visualização e análise dos dados
 - **VS Code** — IDE utilizada
 
 ---
