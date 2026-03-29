@@ -37,6 +37,8 @@ sqlite3 censo_escolar.db -- inicia a database que vamos utilizar
 .import "/.../dados/RESULTADOS_ENEM.csv" resultados
 ```
 
+Curiosidade: A database ficou gigante! São 2,2 GB de arquivo de dados, mas filtrando por Santa Maria, onde faremos, fica mais tranquilo. 😅
+
 ## 1. Consultas iniciais
 
 A partir dessa primeira consulta, poderemos ter um norte de como seguiremos com o projeto. Com ela, saberemos a quantidade total de escolas que iremos trabalhar.
