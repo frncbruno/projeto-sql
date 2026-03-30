@@ -208,6 +208,7 @@ Das **195 escolas** analisadas em Santa Maria:
 - **SQL (SQLite)** — agregação dos microdados do ENEM
 - **Power BI** — ferramenta utilizada para a criação dos dashboards, visualização e análise dos dados
 - **VS Code** — IDE utilizada
+- **Figma** - utilizado para a realização do background
 
 ---
 
