@@ -120,20 +120,35 @@ O vínculo entre as duas bases é feito pelo código da escola (`CO_ENTIDADE` no
 A análise vai combinar:
 - **Correlação** entre IIE e média geral do ENEM
 - **Comparação por categoria** de infraestrutura (Boa/Mediana/Precária)
-- **Comparação por dependência administrativa** (Federal/Estadual/Privada)
+- **Comparação por tipo de escola na questão administrativa** (Federal/Estadual/Privada)
 - **Casos de destaque**: escolas com infraestrutura precária e bom desempenho, ou o inverso
 
 ---
 
-## 📊 Resultados Esperados
+## 📊 Resultados
 
-Com base na análise, esperamos responder a perguntas como:
-- Existe correlação entre infraestrutura e nota no ENEM em Santa Maria?
-- As escolas estaduais, que concentram a maioria das classificadas como precárias, apresentam as menores médias?
-- Quais escolas surpreendem — para cima ou para baixo — em relação ao que sua infraestrutura sugeriria?
-- A infraestrutura tecnológica (internet, computadores) tem correlação mais forte com o desempenho do que o saneamento básico?
+Das **38 escolas** com dados completos de infraestrutura e ENEM:
 
-Os resultados podem contribuir para **decisões de investimento em infraestrutura escolar**, apontando onde a melhoria física teria maior potencial de impacto no aprendizado.
+### Média ENEM por categoria de infraestrutura
+
+| Categoria | IIE médio | Média ENEM | Alunos |
+|---|---|---|---|
+| 🟢 Boa | 86,3 | 573,2 | 1.442 |
+| 🟡 Mediana | 67,5 | 555,3 | 233 |
+| 🔴 Precária | 52,8 | 504,8 | 251 |
+
+### Média ENEM por tipo de escola
+
+| Tipo | IIE médio | Média ENEM |
+|---|---|---|
+| Federal | 93,5 | 678,2 |
+| Privada | 84,9 | 622,4 |
+| Estadual | 73,6 | 506,3 |
+
+### Distribuição de infraestrutura por tipo de escola
+- **100%** das escolas federais possuem infraestrutura classificada como Boa
+- **85,7%** das privadas possuem infraestrutura Boa
+- As escolas estaduais são as mais divergentes: 57,1% Boa, 23,8% Mediana e 19,1% Precária
 
 ---
 
@@ -157,9 +172,21 @@ Das **195 escolas** analisadas em Santa Maria:
 │   └── Notas_santa_maria.csv         # Microdados ENEM — notas por aluno
 ├── outputs/
 │   ├── infra_scores.csv              # IIE calculado por escola
+│   ├── dim_escolas.csv               # Tabela dimensional para Power BI
+│   └── fato_enem.csv                 # Tabela de médias ENEM por escola para Power BI
 ├── analysis/
-    └── (dashboards em desenvolvimento)
+    └── dashboard_powerbi/            # Dashboards em Power BI (.pbix)
 ```
+
+---
+
+## 💡 Conclusões
+
+- **68 pontos separam escolas Boas das Precárias.** A diferença na média geral do ENEM entre as duas categorias pode soar um grande alarme.
+- **Escolas federais lideram em tudo.** Com 100% de infraestrutura Boa e média ENEM de 678,2, as federais ficam bem acima das outras, reflexo de maior aporte de recursos e, em parte, de maior seletividade no acesso.
+- **As estaduais são o grupo mais desigual.** Com espectro que vai de infraestrutura plena a precária e média ENEM de 506,3, as escolas estaduais concentram a maior desigualdade e o maior potencial de ganho com investimentos estruturais.
+- **Há exceções relevantes nos dois sentidos.** O Instituto Olavo Bilac (IIE 52,8 -> 526 pts) performa acima do esperado para sua infraestrutura, sugerindo gestão ou corpo docente diferenciados. Diferentemente de ET Albert Einstein (IIE 77,8 -> 479 pts), ficando abaixo do padrão das privadas com infraestrutura equivalente.
+- **31% das escolas municipais operam em condições precárias**. Embora não participem do ENEM, esse dado aponta uma desigualdade estrutural relevante que afeta a base da educação no município.
 
 ---
 
@@ -168,11 +195,10 @@ Das **195 escolas** analisadas em Santa Maria:
 - [x] Coleta e limpeza dos dados do Censo Escolar
 - [x] Construção do Índice de Infraestrutura Escolar (IIE)
 - [x] Classificação das 195 escolas em Boa / Mediana / Precária
-- [x] Dashboard interativo de infraestrutura
 - [x] Coleta e validação dos microdados do ENEM
 - [x] Cruzamento IIE × médias do ENEM
-- [ ] Análise de correlação e visualizações finais
-- [ ] Relatório de conclusões
+- [x] Dashboard interativo no Power BI (2 páginas)
+- [x] Relatório de conclusões
 
 ---
 
