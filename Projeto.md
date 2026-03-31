@@ -80,7 +80,7 @@ Antes de calcular o IIE e cruzar com o ENEM, foram realizadas as seguintes etapa
 - Das 195 escolas do Censo, 38 possuíam correspondência nos microdados do ENEM — as demais são creches e escolas de ensino fundamental, que não participam do exame
 
 **Power BI:**
-- Foram tratadas as colunas necessárias, identificando-as como percentual, decimal, número inteiro ou texto
+- Foram tratadas as colunas necessárias via Power Query, identificando-as como percentual, decimal, número inteiro ou texto
 - Também no BI, foram unidas pela cardinalidade 1:1, por join `CO_ENTIDADE` (Censo) = `CO_ESCOLA` (ENEM)
 
 
