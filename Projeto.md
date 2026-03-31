@@ -6,15 +6,6 @@ Santa Maria é o maior município do interior gaúcho e concentra uma rede escol
 
 ---
 
-## 🗂️ Fontes de Dados
-
-| Fonte | Descrição |
-|---|---|
-| **Censo Escolar 2025 (INEP)** | Dados de infraestrutura física de todas as escolas do município |
-| **Microdados do ENEM** | Notas individuais dos alunos por escola, filtradas para Santa Maria/RS |
-
----
-
 ## ⚙️ Metodologia
 
 ## 0. Criação da database
@@ -70,8 +61,30 @@ WHERE e1.NO_MUNICIPIO = 'Santa Maria'
       AND e1.SG_UF = 'RS'
 ```
 
+## 2. Limpeza e tratamento dos dados (Data Cleaning)
 
-### 1. Índice de Infraestrutura Escolar (IIE)
+Antes de calcular o IIE e cruzar com o ENEM, foram realizadas as seguintes etapas de limpeza e tratamento sobre os dados brutos:
+
+**Censo Escolar:**
+- Filtragem por município (`NO_MUNICIPIO = 'Santa Maria'`) e estado (`SG_UF = 'RS'`), reduzindo de ~180 mil escolas nacionais para 195 escolas locais
+- Seleção das colunas relevantes para o IIE (indicadores `IN_*`) e identificação (`CO_ENTIDADE`, `NO_ENTIDADE`, `TP_DEPENDENCIA`)
+- Tratamento de valores nulos (registros com `NULL` nos indicadores de infraestrutura foram tratados como ausência do recurso (`0`))
+
+**Microdados do ENEM:**
+- Filtragem por `SG_UF_ESC = 'RS'` para manter apenas alunos de escolas gaúchas
+- Remoção de registros com todas as cinco notas nulas (alunos ausentes ou que não realizaram o exame)
+- Agregação por escola (`CO_ESCOLA`): as médias de cada área foram calculadas com `AVG()` por coluna separadamente, ignorando `NULL`
+
+**Cruzamento:**
+- Join entre as duas bases via `CO_ENTIDADE` (Censo) = `CO_ESCOLA` (ENEM)
+- Das 195 escolas do Censo, 38 possuíam correspondência nos microdados do ENEM — as demais são creches e escolas de ensino fundamental, que não participam do exame
+
+**Power BI:**
+- Foram tratadas as colunas necessárias, identificando-as como percentual, decimal, número inteiro ou texto.
+- Também no BI, foram unidas pela cardinalidade 1:1, por join `CO_ENTIDADE` (Censo) = `CO_ESCOLA` (ENEM).
+
+
+### 3. Índice de Infraestrutura Escolar (IIE)
 
 A partir das variáveis do Censo Escolar, foi construído um índice composto que avalia cada escola em quatro dimensões, com pesos proporcionais ao impacto pedagógico:
 
@@ -91,7 +104,7 @@ As escolas foram classificadas em três categorias:
 | 🟡 Mediana | 61 – 74 pontos | 67 escolas (34%) |
 | 🔴 Precária | < 61 pontos | 61 escolas (31%) |
 
-### 2. Médias do ENEM por Escola
+### 4. Médias do ENEM por Escola
 
 A partir dos microdados do ENEM, as notas individuais foram agregadas por escola (`CO_ESCOLA`), calculando a média de cada área separadamente e a média geral, podendo evitar o problema de registros com notas ausentes (`NULL`) que descartariam alunos indevidamente se somados antes de agregar.
 
@@ -113,7 +126,7 @@ GROUP BY CO_ESCOLA
 ORDER BY MEDIA_GERAL DESC;
 ```
 
-### 3. Cruzamento e Análise
+### 5. Cruzamento e Análise
 
 O vínculo entre as duas bases é feito pelo código da escola (`CO_ENTIDADE` no Censo = `CO_ESCOLA` no ENEM). Em termos "SQL", poderia ser chamado de `ID ou chaves primárias`, utilizadas para vincular duas ou mais tabelas pelo `JOIN`.
 
@@ -168,14 +181,21 @@ Das **195 escolas** analisadas em Santa Maria:
 ```
 .
 ├── data/
-│   ├── Colegios_santa_maria.csv      # Censo Escolar 2025 — infraestrutura
-│   └── Notas_santa_maria.csv         # Microdados ENEM — notas por aluno
+│   ├── raw/                              # Dados originais (raw)
+│   │   ├── Colegios_santa_maria_raw.csv  # Censo Escolar 2025 — infraestrutura
+│   │   └── Notas_santa_maria_raw.csv     # Microdados ENEM — notas por aluno
+│   └── censo_escolar.db                  # Database SQLite
 ├── outputs/
-│   ├── infra_scores.csv              # IIE calculado por escola
-│   ├── dim_escolas.csv               # Tabela dimensional para Power BI
-│   └── fato_enem.csv                 # Tabela de médias ENEM por escola para Power BI
+│   ├── infra_pontuacao.csv               # IIE calculado por escola
+│   ├── dim_escolas.csv                   # Tabela dimensional para Power BI
+│   └── fato_enem.csv                     # Tabela de médias ENEM por escola para Power BI
 ├── analysis/
-    └── dashboard_powerbi/            # Dashboards em Power BI (.pbix)
+│   ├── calculo_iie.py                    # Cálculo do Índice de Infraestrutura
+│   ├── medias_enem.py                    # Agregação das notas por escola
+│   └── cruzamento.py                     # Cruzamento IIE × ENEM e correlação
+├── dashboard_powerbi/                    # Dashboards em Power BI (.pbix)
+├── requirements.txt                      # Dependências Python
+└── README.md
 ```
 
 ---
@@ -212,14 +232,20 @@ Das **195 escolas** analisadas em Santa Maria:
 
 ## 🛠️ Tecnologias
 
-- **Python** (pandas) — processamento e análise dos dados
+## 🛠️ Tecnologias
+
+- **Python 3.12.3** — linguagem principal
+  - `pandas 3.0.1` — processamento e análise dos dados
+  - `numpy 2.4.2` — operações numéricas
+  - `scipy 1.17.0` — cálculo de correlação estatística
 - **SQL (SQLite)** — agregação dos microdados do ENEM
-- **Power BI** — ferramenta utilizada para a criação dos dashboards, visualização e análise dos dados
+- **Power BI** — criação dos dashboards, visualização e análise dos dados
 - **VS Code** — IDE utilizada
-- **Figma** — utilizado para a realização do background
 
 ---
 
 ## 📜 Fonte
 
 Dados públicos provenientes do INEP e Ministério da Educação.
+- [Censo Escolar 2025]([https://seusite.com](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar))
+- [Microdados ENEM](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados)
