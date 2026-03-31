@@ -13,5 +13,4 @@ LEFT JOIN docente AS e5
 ON e1.CO_ENTIDADE = e5.CO_ENTIDADE
 
 WHERE e1.NO_MUNICIPIO = 'Santa Maria' 
-      AND e1.SG_UF = 'RS' 
-      AND e1.NO_ENTIDADE LIKE '%Maria Rocha%';
+      AND e1.SG_UF = 'RS'
