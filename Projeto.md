@@ -243,5 +243,5 @@ Das **195 escolas** analisadas em Santa Maria:
 ## 📜 Fonte
 
 Dados públicos provenientes do INEP e Ministério da Educação.
-- [Censo Escolar 2025]([https://seusite.com](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar)
+- [Censo Escolar 2025](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar)
 - [Microdados ENEM](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados)
