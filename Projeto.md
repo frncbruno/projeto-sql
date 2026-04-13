@@ -234,8 +234,6 @@ Das **195 escolas** analisadas em Santa Maria:
 
 - **Python 3.12.3** — linguagem principal
   - `pandas 3.0.1` — processamento e análise dos dados
-  - `numpy 2.4.2` — operações numéricas
-  - `scipy 1.17.0` — cálculo de correlação estatística
 - **SQL (SQLite)** — agregação dos microdados do ENEM
 - **Power BI** — criação dos dashboards, visualização e análise dos dados
 - **VS Code** — IDE utilizada
