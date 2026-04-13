@@ -232,8 +232,6 @@ Das **195 escolas** analisadas em Santa Maria:
 
 ## 🛠️ Tecnologias
 
-## 🛠️ Tecnologias
-
 - **Python 3.12.3** — linguagem principal
   - `pandas 3.0.1` — processamento e análise dos dados
   - `numpy 2.4.2` — operações numéricas
