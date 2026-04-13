@@ -210,11 +210,25 @@ Das **195 escolas** analisadas em Santa Maria:
 
 ## 💡 Conclusões
 
-- **68 pontos separam escolas Boas das Precárias.** A diferença na média geral do ENEM entre as duas categorias pode soar um grande alarme.
-- **Escolas federais lideram em tudo.** Com 100% de infraestrutura Boa e média ENEM de 678,2, as federais ficam bem acima das outras, reflexo de maior aporte de recursos e, em parte, de maior seletividade no acesso.
-- **As estaduais são o grupo mais desigual.** Com espectro que vai de infraestrutura plena a precária e média ENEM de 506,3, as escolas estaduais concentram a maior desigualdade e o maior potencial de ganho com investimentos estruturais.
-- **Há exceções relevantes nos dois sentidos.** O Instituto Olavo Bilac (IIE 52,8 -> 526 pts) performa acima do esperado para sua infraestrutura, sugerindo gestão ou corpo docente diferenciados. Diferentemente de ET Albert Einstein (IIE 77,8 -> 479 pts), ficando abaixo do padrão das privadas com infraestrutura equivalente.
-- **31% das escolas municipais operam em condições precárias**. Embora não participem do ENEM, esse dado aponta uma desigualdade estrutural relevante que afeta a base da educação no município.
+- 68 pontos separam escolas Boas das Precárias. A diferença na média geral do ENEM entre as duas categorias pode soar um grande alarme.
+- Nem toda infraestrutura impacta da mesma forma. Saneamento e tecnologia, isoladamente, não apresentaram correlação significativa com o ENEM. Espaços pedagógicos e acessibilidade sim, o que muda a conversa sobre onde investir primeiro.
+- Escolas federais lideram em tudo. Com 100% de infraestrutura Boa e média ENEM de 678,2, as federais ficam bem acima das outras, reflexo de maior aporte de recursos e, em parte, de maior seletividade no acesso.
+- As estaduais são o grupo mais desigual. Com espectro que vai de infraestrutura plena a precária e média ENEM de 506,3, as escolas estaduais concentram a maior desigualdade e o maior potencial de ganho com investimentos estruturais.
+- Há exceções relevantes nos dois sentidos. O Instituto Olavo Bilac (IIE 52,8 → 526 pts) performa acima do esperado para sua infraestrutura, sugerindo gestão ou corpo docente diferenciados. Diferentemente de ET Albert Einstein (IIE 77,8 → 479 pts), ficando abaixo do padrão das privadas com infraestrutura equivalente. Esses casos mostram que infraestrutura importa, mas não explica tudo. Fatores como qualidade docente, gestão escolar e contexto socioeconômico dos alunos não estão capturados nesta análise e merecem investigação para ser mais assertivo.
+- 31% das escolas municipais operam em condições precárias. Embora não participem do ENEM, esse dado aponta uma desigualdade estrutural relevante que afeta a base da educação no município.
+
+---
+
+## 🎯 Recomendações
+
+Com base nos achados, algumas direções concretas para gestores da rede pública de Santa Maria:
+
+- Priorizar espaços pedagógicos nas escolas estaduais precárias. Das 9 escolas estaduais com infraestrutura Precária, nenhuma possui pátio coberto, apenas 11% têm quadra de esportes e 22% têm laboratório de ciências, exatamente os recursos com maior correlação com o desempenho no ENEM. Intervenções nesses espaços têm maior respaldo nos dados do que, por exemplo, ampliar conectividade isoladamente.
+- Investigar as escolas que performam acima do esperado. O Instituto Olavo Bilac entrega resultados acima da média com infraestrutura precária. Entender o que essas escolas fazem de diferente (gestão, metodologia, perfil docente) pode gerar aprendizados replicáveis para toda a rede estadual, sem depender de obras.
+- Não tratar tecnologia como solução isolada. A a relação entre a dimensão de tecnologia e o ENEM não foi estatisticamente significativa nesta amostra. Isso não significa que tecnologia não importa, mas sugere que investimentos em conectividade sem acompanhamento pedagógico estruturado podem ter retorno limitado.
+- Os espaços pedagógicos (bibliotecas, laboratórios, quadras) e a acessibilidade são as dimensões com maior associação estatística com os resultados. Isso sugere que, do ponto de vista de priorização de investimentos, obras e equipamentos diretamente ligados ao ambiente de aprendizagem têm maior retorno mensurável do que conectividade ou infraestrutura básica isoladas.
+
+> ⚠️ **Limitação importante:** Fatores como nível socioeconômico dos alunos, qualidade docente e gestão escolar não foram controlados e podem explicar parte ou toda a relação observada. As recomendações acima devem ser tratadas como hipóteses a investigar, não como conclusões definitivas.
 
 ---
 
