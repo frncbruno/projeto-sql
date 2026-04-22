@@ -259,3 +259,10 @@ Com base nos achados, algumas direções concretas para gestores da rede públic
 Dados públicos provenientes do INEP e Ministério da Educação.
 - [Censo Escolar 2025](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar)
 - [Microdados ENEM](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados)
+
+---
+
+## 👨‍💻 Autor
+
+**Bruno Tubino Franco**  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://linkedin.com/in/brunotubino)
